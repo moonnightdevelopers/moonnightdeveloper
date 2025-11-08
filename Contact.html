@@ -540,12 +540,13 @@
 
     @media (max-width: 768px) {
       .desktop-nav {
-                display: none;
-            }
-            
-            .mobile-nav-toggle {
-                display: flex;
-            }
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: flex;
+      }
+
       .header-container {
         flex-wrap: wrap;
         gap: 16px;
@@ -696,6 +697,10 @@
     @media (max-width: 480px) {
       .header-container {
         padding: 8px 12px;
+      }
+
+      .mobile-navnon {
+        display: none;
       }
 
       .creator-info {
@@ -1015,6 +1020,7 @@
       }
     }
 
+    /* 
     @media (max-width: 480px) {
       .floating-contact-btn {
         bottom: 15px;
@@ -1033,112 +1039,113 @@
       .contact-options {
         padding: 20px;
       }
-    }
+    } */
 
 
     /* mobile nevbar */
-     /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-        }
+    /* Mobile Navigation */
+    .mobile-nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
 
-        .mobile-nav-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--primary-color);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
+    .mobile-nav-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: var(--primary-color);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
 
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 74px;
-            left: 0;
-            width: 100%;
-            background-color: var(--white);
-            box-shadow: var(--shadow);
-            z-index: 999;
-            padding: 0;
-            transform: translateY(-10px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 74px;
+      left: 0;
+      width: 100%;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      z-index: 999;
+      padding: 0;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
 
-        .mobile-nav.active {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
+    .mobile-nav.active {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+    }
 
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-        }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .mobile-nav-link {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s;
-        }
+    .mobile-nav-link {
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s;
+    }
 
-        .mobile-nav-link:hover {
-            background-color: var(--accent-color);
-        }
+    .mobile-nav-link:hover {
+      background-color: var(--accent-color);
+    }
 
-        .mobile-nav-link.active {
-            color: var(--primary-color);
-            font-weight: 600;
-            background-color: rgba(28, 57, 116, 0.05);
-        }
-        /*  */
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: flex;
-            gap: 25px;
-        }
+    .mobile-nav-link.active {
+      color: var(--primary-color);
+      font-weight: 600;
+      background-color: rgba(28, 57, 116, 0.05);
+    }
 
-        .nav-link {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 8px 0;
-            position: relative;
-            transition: color 0.3s;
-        }
+    /*  */
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      gap: 25px;
+    }
 
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
+    .nav-link {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 8px 0;
+      position: relative;
+      transition: color 0.3s;
+    }
 
-        .nav-link.active {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
 
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-        }
+    .nav-link.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
   </style>
 </head>
 
@@ -1148,7 +1155,7 @@
     <div class="header-container">
       <div class="creator-info">
         <div class="logo">MND</div>
-        <div>
+        <div class="mobile-navnon">
           <h1 class="creator-name"><a href="index.html">MND</a></h1>
           <p class="supporter-count">Development</p>
         </div>
@@ -1169,24 +1176,24 @@
         <a href="Contact.html" class="tab active">Contact</a>
       </nav>
       <!-- Mobile Navigation Toggle -->
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
 
-        <!-- Mobile Navigation Menu -->
-        <nav class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-links">
-                <a href="index.html" class="mobile-nav-link">Home</a>
-                <a href="about.html" class="mobile-nav-link">About</a>
-                <a href="services.html" class="mobile-nav-link">Services</a>
-                <a href="projects.html" class="mobile-nav-link">Projects</a>
-                <a href="blog.html" class="mobile-nav-link">Blog</a>
-                <a href="contact.html" class="mobile-nav-link active">Contact</a>
-            </div>
-        </nav>
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-nav" id="mobileNav">
+      <div class="mobile-nav-links">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="services.html" class="mobile-nav-link">Services</a>
+        <a href="projects.html" class="mobile-nav-link">Projects</a>
+        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="contact.html" class="mobile-nav-link active">Contact</a>
+      </div>
+    </nav>
     </div>
   </header>
 
@@ -1253,7 +1260,7 @@
             </svg>
             Send Message
           </button>
-          
+
           <div class="success-message" id="successMessage">
             Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
           </div>
@@ -1606,7 +1613,7 @@
 
         question.addEventListener('click', () => {
           const isActive = item.classList.contains('active');
-          
+
           // Close all items
           faqItems.forEach(otherItem => {
             otherItem.classList.remove('active');
@@ -1641,7 +1648,7 @@
       // Form validation
       function validateField(field, errorElement, validationFn) {
         const isValid = validationFn(field.value);
-        
+
         if (!isValid) {
           field.classList.add('error');
           errorElement.style.display = 'block';
@@ -1717,10 +1724,10 @@
           setTimeout(() => {
             // Show success message
             successMessage.style.display = 'block';
-            
+
             // Reset form
             contactForm.reset();
-            
+
             // Re-enable submit button
             submitBtn.disabled = false;
             submitBtn.innerHTML = `
@@ -1730,7 +1737,7 @@
               </svg>
               Send Message
             `;
-            
+
             // Hide success message after 5 seconds
             setTimeout(() => {
               successMessage.style.display = 'none';
@@ -1766,51 +1773,51 @@
       // In a real implementation, this would open a scheduling system
     }
 
-        // Mobile Navigation Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileNavToggle = document.getElementById('mobileNavToggle');
-            const mobileNav = document.getElementById('mobileNav');
-            
-            mobileNavToggle.addEventListener('click', function() {
-                mobileNav.classList.toggle('active');
-                mobileNavToggle.classList.toggle('active');
-                
-                // Animate hamburger to X
-                const spans = mobileNavToggle.querySelectorAll('span');
-                if (mobileNavToggle.classList.contains('active')) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
-            
-            // Close mobile menu when clicking on a link
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileNav.classList.remove('active');
-                    mobileNavToggle.classList.remove('active');
-                    
-                    // Reset hamburger animation
-                    const spans = mobileNavToggle.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                });
-            });
-            
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
+    // Mobile Navigation Toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const mobileNavToggle = document.getElementById('mobileNavToggle');
+      const mobileNav = document.getElementById('mobileNav');
+
+      mobileNavToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active');
+        mobileNavToggle.classList.toggle('active');
+
+        // Animate hamburger to X
+        const spans = mobileNavToggle.querySelectorAll('span');
+        if (mobileNavToggle.classList.contains('active')) {
+          spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          mobileNav.classList.remove('active');
+          mobileNavToggle.classList.remove('active');
+
+          // Reset hamburger animation
+          const spans = mobileNavToggle.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
         });
+      });
+
+      // Form submission
+      const contactForm = document.getElementById('contactForm');
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Thank you for your message! We will get back to you soon.');
+        contactForm.reset();
+      });
+    });
     // inspect block function
     /// Disable right-click
     document.addEventListener('contextmenu', (e) => e.preventDefault());
