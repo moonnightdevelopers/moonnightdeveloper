@@ -484,6 +484,7 @@
                 display: none;
             }
         }
+
         /* Mobile Navigation */
         .mobile-nav-toggle {
             display: none;
@@ -551,9 +552,6 @@
             font-weight: 600;
             background-color: rgba(28, 57, 116, 0.05);
         }
-
-
-
     </style>
 </head>
 
@@ -570,13 +568,13 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <nav class="desktop-nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="services.html" class="nav-link">Services</a>
-                <a href="projects.html" class="nav-link">Projects</a>
-                <a href="blog.html" class="nav-link active">Blog</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+            <nav class="tabs" id="navTabs">
+                <a href="index.html" class="tab ">Home</a>
+                <a href="about.html" class="tab">About</a>
+                <a href="services.html" class="tab">Services</a>
+                <a href="project.html" class="tab">Project's</a>
+                <a href="blog.html" class="tab active">Blog</a>
+                <a href="Contact.html" class="tab">Contact</a>
             </nav>
 
             <!-- Mobile Navigation Toggle -->
@@ -746,7 +744,7 @@
                 <div class="footer-divider"></div>
                 <a href="Terms_of_Service.html" class="footer-link">Privacy Policy</a>
                 <div class="footer-divider"></div>
-                 <a href="404.html" class="footer-link">Terms of Service</a>
+                <a href="404.html" class="footer-link">Terms of Service</a>
             </div>
             <div class="footer-cta">
                 <h5>© Copyright 2025 by MND. All rights reserved!</h5>
@@ -800,15 +798,15 @@
                 return false;
         };
 
-         // Mobile Navigation Toggle
-        document.addEventListener('DOMContentLoaded', function() {
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileNavToggle = document.getElementById('mobileNavToggle');
             const mobileNav = document.getElementById('mobileNav');
-            
-            mobileNavToggle.addEventListener('click', function() {
+
+            mobileNavToggle.addEventListener('click', function () {
                 mobileNav.classList.toggle('active');
                 mobileNavToggle.classList.toggle('active');
-                
+
                 // Animate hamburger to X
                 const spans = mobileNavToggle.querySelectorAll('span');
                 if (mobileNavToggle.classList.contains('active')) {
@@ -821,14 +819,14 @@
                     spans[2].style.transform = 'none';
                 }
             });
-            
+
             // Close mobile menu when clicking on a link
             const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
             mobileNavLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function () {
                     mobileNav.classList.remove('active');
                     mobileNavToggle.classList.remove('active');
-                    
+
                     // Reset hamburger animation
                     const spans = mobileNavToggle.querySelectorAll('span');
                     spans[0].style.transform = 'none';
@@ -836,10 +834,10 @@
                     spans[2].style.transform = 'none';
                 });
             });
-            
+
             // Form submission
             const contactForm = document.getElementById('contactForm');
-            contactForm.addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 alert('Thank you for your message! We will get back to you soon.');
                 contactForm.reset();
