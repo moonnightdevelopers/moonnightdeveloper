@@ -748,6 +748,257 @@
             text-align: center;
         }
 
+        /* Responsive Styles for Services Page */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                padding: 30px 16px;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .tabs {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .auth-buttons {
+                order: 2;
+            }
+
+            .content-box {
+                padding: 24px 16px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .page-subtitle {
+                font-size: 16px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-pricing {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .services-intro {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .service-icon img {
+                height: 220px;
+            }
+
+            .service-info {
+                padding: 20px;
+            }
+
+            .service-name {
+                font-size: 20px;
+            }
+
+            .mission-card {
+                padding: 20px;
+            }
+
+            .mission-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .testimonial-card {
+                padding: 20px;
+            }
+
+            .faq-question {
+                padding: 16px;
+                font-size: 14px;
+            }
+
+            .faq-answer {
+                padding: 0 16px;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 16px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-description {
+                font-size: 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .footer-divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-content {
+                padding: 20px 12px;
+            }
+
+            .content-box {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .page-subtitle {
+                font-size: 14px;
+            }
+
+            .services-intro {
+                font-size: 15px;
+                margin-bottom: 25px;
+            }
+
+            .service-icon img {
+                height: 180px;
+            }
+
+            .service-features li {
+                padding: 6px 0;
+                font-size: 14px;
+            }
+
+            .price {
+                font-size: 20px;
+            }
+
+            .service-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .step-title {
+                font-size: 18px;
+            }
+
+            .cta-section {
+                padding: 30px 16px;
+            }
+
+            .cta-title {
+                font-size: 1.6rem;
+            }
+
+            .cta-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 8px 12px;
+            }
+
+            .creator-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .creator-name {
+                font-size: 18px;
+            }
+
+            .tabs {
+                gap: 8px;
+            }
+
+            .tab {
+                font-size: 12px;
+                padding: 6px;
+            }
+
+            .service-info {
+                padding: 16px;
+            }
+
+            .service-name {
+                font-size: 18px;
+            }
+
+            .service-description {
+                font-size: 14px;
+            }
+
+            .process-step {
+                padding: 20px 15px;
+            }
+
+            .testimonial-author {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .author-avatar {
+                align-self: center;
+            }
+        }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .header-container {
@@ -1149,7 +1400,7 @@
                 <div class="footer-divider"></div>
                 <a href="Terms_of_Service.html" class="footer-link">Privacy Policy</a>
                 <div class="footer-divider"></div>
-                 <a href="404.html" class="footer-link">Terms of Service</a>
+                <a href="404.html" class="footer-link">Terms of Service</a>
             </div>
             <div class="footer-cta">
                 <h5>© Copyright 2025 by MND. All rights reserved!</h5>
