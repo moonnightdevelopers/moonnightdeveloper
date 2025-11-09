@@ -431,8 +431,8 @@ function createNavbarHTML(currentPage = null) {
             </nav>
 
             <div class="auth-buttons">
-                <a href="#" class="login-btn">Log in</a>
-                <a href="#" class="signup-btn">Sign up</a>
+                <a href="./404.html" class="login-btn">Log in</a>
+                <a href="./404.html" class="signup-btn">Sign up</a>
             </div>
         </div>
     </header>
@@ -475,13 +475,13 @@ function initializeNavbar() {
     }
 
     // Handle login/signup buttons
-    document.querySelectorAll('.login-btn, .signup-btn').forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            const isLogin = this.classList.contains('login-btn');
-            alert(`This would open the ${isLogin ? 'login' : 'signup'} modal`);
-        });
-    });
+    // document.querySelectorAll('.login-btn, .signup-btn').forEach(button => {
+    //     button.addEventListener('click', function (e) {
+    //         e.preventDefault();
+    //         const isLogin = this.classList.contains('login-btn');
+    //         alert(`This would open the ${isLogin ? 'login' : 'signup'} modal`);
+    //     });
+    // });
 
     // Update active tab based on current page
     updateActiveTab();
