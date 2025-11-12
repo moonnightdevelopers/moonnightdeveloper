@@ -222,5 +222,5 @@ If you have any questions or need support, please contact:
 **Last Updated**: March 2025  
 **Version**: 1.0.0  
 **Developer**: MND Development Team
-
+<!-- https://hikez-theme.myshopify.com/ -->
 <!-- fully responsive in all devices like mobile phone tablet pc tablet pc desktop navbar only -->

@@ -20,6 +20,8 @@
             background-color: #fef2f2;
         }
 
+
+
         .content-box {
             background-color: white;
             border-radius: 12px;
@@ -107,10 +109,6 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .service-icon img {
@@ -635,6 +633,51 @@
             transform: rotate(45deg);
         }
 
+        /* Footer */
+        .footer {
+            background-color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .footer-link {
+            color: #1C1B1F;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #1c3974;
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 16px;
+            background-color: #e5e5e5;
+        }
+
+        .footer-cta {
+            text-align: center;
+        }
+
         /* Back to top button */
         .back-to-top {
             position: fixed;
@@ -668,6 +711,32 @@
 
         /* Responsive Styles */
         @media (max-width: 768px) {
+            .tabs {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 99;
+            }
+
+            .tabs.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
             .content-box {
                 padding: 24px 16px;
             }
@@ -692,6 +761,15 @@
                 flex-direction: column;
                 gap: 15px;
                 align-items: flex-start;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .footer-divider {
+                display: none;
             }
 
             .cta-title {
@@ -740,7 +818,7 @@
                 <!-- Service 1 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/pageimg/Custom Website Development.webp" alt="Custom Website Development" onerror="this.style.display='none'; this.parentElement.innerHTML='🌐'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/pageimg/Custom Website Development.webp" alt="Custom Website Development">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">Custom Website Development</h3>
@@ -763,7 +841,7 @@
                 <!-- Service 2 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/pageimg/E-commerce Solutions.webp" alt="E-commerce Solutions" onerror="this.style.display='none'; this.parentElement.innerHTML='🛒'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/pageimg/E-commerce Solutions.webp" alt="E-commerce Solutions">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">E-commerce Solutions</h3>
@@ -786,7 +864,7 @@
                 <!-- Service 3 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/pageimg/Web Application Development.png" alt="Web Application Development" onerror="this.style.display='none'; this.parentElement.innerHTML='⚡'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/pageimg/Web Application Development.png" alt="Web Application Development">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">Web Application Development</h3>
@@ -809,7 +887,7 @@
                 <!-- Service 4 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/pageimg/UIUX Design2.avif" alt="UI/UX Design" onerror="this.style.display='none'; this.parentElement.innerHTML='🎨'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/pageimg/UIUX Design2.avif" alt="UI/UX Design">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">UI/UX Design</h3>
@@ -832,7 +910,7 @@
                 <!-- Service 5 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/pageimg/Website Maintenance.webp" alt="Website Maintenance" onerror="this.style.display='none'; this.parentElement.innerHTML='🔧'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/pageimg/Website Maintenance.webp" alt="Website Maintenance">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">Website Maintenance</h3>
@@ -855,7 +933,7 @@
                 <!-- Service 6 -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="./img/Tours & Travel Website.jpg" alt="Website Templates" onerror="this.style.display='none'; this.parentElement.innerHTML='📁'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='#1c3974';">
+                        <img src="./img/projectimg06.jpg" alt="Website Templates">
                     </div>
                     <div class="service-info">
                         <h3 class="service-name">Website Templates</h3>
@@ -1052,6 +1130,18 @@
     <script src="./assets/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+
+
             // Service button click handlers
             document.querySelectorAll('.service-button').forEach(button => {
                 button.addEventListener('click', function () {
@@ -1071,7 +1161,7 @@
             // CTA button click handler
             document.querySelector('.cta-button').addEventListener('click', function (e) {
                 // In a real implementation, this would navigate to the contact page
-                // For demo purposes, we'll just show an alert if the link is not working
+                // For demo purposes, we'll just show an alert
                 if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
                     e.preventDefault();
                     alert('This would navigate to the contact page in a real implementation.');
@@ -1095,31 +1185,8 @@
                     behavior: 'smooth'
                 });
             });
-
-            // Image error handling - fallback to emojis
-            document.querySelectorAll('.service-icon img').forEach(img => {
-                img.addEventListener('error', function() {
-                    this.style.display = 'none';
-                    const serviceName = this.alt.toLowerCase();
-                    let emoji = '🌐';
-                    
-                    if (serviceName.includes('e-commerce') || serviceName.includes('commerce')) emoji = '🛒';
-                    else if (serviceName.includes('application')) emoji = '⚡';
-                    else if (serviceName.includes('ui') || serviceName.includes('ux') || serviceName.includes('design')) emoji = '🎨';
-                    else if (serviceName.includes('maintenance')) emoji = '🔧';
-                    else if (serviceName.includes('template')) emoji = '📁';
-                    
-                    this.parentElement.innerHTML = emoji;
-                    this.parentElement.style.fontSize = '4rem';
-                    this.parentElement.style.color = '#1c3974';
-                    this.parentElement.style.display = 'flex';
-                    this.parentElement.style.alignItems = 'center';
-                    this.parentElement.style.justifyContent = 'center';
-                });
-            });
         });
 
-        // ok
     </script>
 </body>
 

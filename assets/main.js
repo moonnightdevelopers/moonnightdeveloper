@@ -1,4 +1,4 @@
-// navbar.js - Global Navbar Styles and Functionality
+// main.js - Global Navbar Styles and Functionality
 
 // Navbar Styles
 const navbarStyles = `
@@ -208,7 +208,7 @@ body {
 .footer-link {
     color: white;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
     transition: opacity 0.2s;
 }
 
@@ -223,7 +223,7 @@ body {
 }
 
 .footer-cta h5 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     opacity: 0.8;
 }
@@ -376,11 +376,17 @@ function getCurrentPage() {
     // Map file names to page keys
     const pageMap = {
         'index.html': 'home',
+        'index': 'home',
         'about.html': 'about',
+        'about': 'about',
         'services.html': 'services',
+        'services': 'services',
         'project.html': 'project',
+        'project': 'project',
         'blog.html': 'blog',
-        ' contact.html': 'contact'
+        'blog': 'blog',
+        'contact.html': 'contact',
+        'contact': 'contact'
     };
 
     return pageMap[page] || 'home';
@@ -394,18 +400,18 @@ function createNavbarHTML(currentPage = null) {
     }
 
     const pages = {
-        'home': 'Home',
-        'about': 'About',
-        'services': 'Services',
-        'project': 'Project',
-        'blog': 'Blog',
-        'contact': 'Contact'
+        'home': { name: 'Home', url: 'index.html' },
+        'about': { name: 'About', url: 'about.html' },
+        'services': { name: 'Services', url: 'services.html' },
+        'project': { name: 'Project', url: 'project.html' },
+        'blog': { name: 'Blog', url: 'blog.html' },
+        'contact': { name: 'Contact', url: 'contact.html' }
     };
 
     let tabsHTML = '';
     for (const [key, value] of Object.entries(pages)) {
         const isActive = key === currentPage ? 'active' : '';
-        tabsHTML += `<a href="${key === 'home' ? 'index.html' : key + '.html'}" class="tab ${isActive}">${value}</a>`;
+        tabsHTML += `<a href="${value.url}" class="tab ${isActive}">${value.name}</a>`;
     }
 
     return `
@@ -439,7 +445,6 @@ function createNavbarHTML(currentPage = null) {
 }
 
 // Navbar Functionality
-
 function initializeNavbar() {
     // Add styles to document
     const styleSheet = document.createElement('style');
@@ -495,19 +500,23 @@ function updateActiveTab() {
     tabs.forEach(tab => {
         tab.classList.remove('active');
         const href = tab.getAttribute('href');
-        const tabPage = href.replace('.html', '').replace('index', 'home');
-
-        if (tabPage === currentPage || (currentPage === 'home' && tabPage === 'home')) {
-            tab.classList.add('active');
+        if (href) {
+            const tabPage = href.replace('.html', '').replace('index', 'home');
+            if (tabPage === currentPage || (currentPage === 'home' && tabPage === 'home')) {
+                tab.classList.add('active');
+            }
         }
     });
 }
 
 // Complete layout setup
 function setupPageLayout(currentPage = null) {
-    // Add navbar
-    const navbarHTML = createNavbarHTML(currentPage);
-    document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+    // Check if navbar already exists
+    if (!document.querySelector('.header')) {
+        // Add navbar
+        const navbarHTML = createNavbarHTML(currentPage);
+        document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+    }
 
     // Create main content area if it doesn't exist
     if (!document.querySelector('.main-content')) {
@@ -515,75 +524,45 @@ function setupPageLayout(currentPage = null) {
         mainContent.className = 'main-content';
 
         // Move existing body content into main content area
-        while (document.body.firstChild) {
-            mainContent.appendChild(document.body.firstChild);
-        }
+        const bodyChildren = Array.from(document.body.children);
+        bodyChildren.forEach(child => {
+            if (!child.classList.contains('header') && !child.classList.contains('footer')) {
+                mainContent.appendChild(child);
+            }
+        });
         document.body.appendChild(mainContent);
     }
 
-    // Add footer
-    const footerHTML = `
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-links">
-                <a href="services.html" class="footer-link">Services</a>
-                <div class="footer-divider"></div>
-                <a href="team.html" class="footer-link">Our Team</a>
-                <div class="footer-divider"></div>
-                <a href="privacy.html" class="footer-link">Privacy Policy</a>
-                <div class="footer-divider"></div>
-                <a href="term.html" class="footer-link">Terms of Service</a>
+    // Add footer if it doesn't exist
+    if (!document.querySelector('.footer')) {
+        const footerHTML = `
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="services.html" class="footer-link">Services</a>
+                    <div class="footer-divider"></div>
+                    <a href="team.html" class="footer-link">Our Team</a>
+                    <div class="footer-divider"></div>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <div class="footer-divider"></div>
+                    <a href="term.html" class="footer-link">Terms of Service</a>
+                </div>
+                <div class="footer-cta">
+                    <h5>© Copyright 2025 by MND. All rights reserved!</h5>
+                </div>
             </div>
-            <div class="footer-cta">
-                <h5>© Copyright 2025 by MND. All rights reserved!</h5>
-            </div>
-        </div>
-    </footer>
-    `;
-    document.body.insertAdjacentHTML('beforeend', footerHTML);
+        </footer>
+        `;
+        document.body.insertAdjacentHTML('beforeend', footerHTML);
+    }
 
     // Initialize functionality
     initializeNavbar();
 }
 
-
-// /// *********************** Disable right-click | inspect block function ************************************
-
-// document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// function ctrlShiftKey(e, keyCode) {
-//     return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
-// }
-
-// document.onkeydown = (e) => {
-//     // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
-//     if (
-//         event.keyCode === 123 ||
-//         ctrlShiftKey(e, 'I') ||
-//         ctrlShiftKey(e, 'J') ||
-//         ctrlShiftKey(e, 'C') ||
-//         (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
-//     )
-//         return false;
-// };
-// // Initialize when DOM is loaded
-// document.addEventListener('DOMContentLoaded', () => {
-//     new NoZoom();
-//     preventZoomEverywhere();
-
-//     // Additional mobile-specific fixes
-//     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-//         enableMobileZoomPrevention();
-//     }
-// });
-
-// ****************************************************************************************************************************************
-
-
-// Modified inspect block function - less restrictive
+// Security Features - Modified to be less intrusive
 document.addEventListener('contextmenu', (e) => {
-    // Allow right-click but show a message
-    // alert('Right-click is disabled on this page');
+    // Allow right-click but prevent default
     e.preventDefault();
 });
 
@@ -600,12 +579,193 @@ document.onkeydown = (e) => {
         ctrlShiftKey(e, 'C') ||
         (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
     ) {
-        alert('Developer tools are disabled on this page');
         return false;
     }
 };
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+
+// Zoom prevention functionality
+class NoZoom {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.disableZoom();
+        this.preventZoomGestures();
+    }
+
+    disableZoom() {
+        // Set viewport to prevent zooming
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 
+                'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'
+            );
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no';
+            document.head.appendChild(meta);
+        }
+    }
+
+    preventZoomGestures() {
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent pinch zoom
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    }
+}
+
+// Initialize zoom prevention
+function preventZoomEverywhere() {
+    // Disable zoom via meta viewport
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (viewportMeta) {
+        viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no';
+    }
+
+    // Disable zoom via CSS
+    const antiZoomStyle = document.createElement('style');
+    antiZoomStyle.textContent = `
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    `;
+    document.head.appendChild(antiZoomStyle);
+}
+
+// Mobile-specific zoom prevention
+function enableMobileZoomPrevention() {
+    // Disable elastic scrolling (can sometimes cause zoom issues)
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    // Force no zoom on load
+    setTimeout(() => {
+        document.body.style.zoom = "1";
+        document.documentElement.style.zoom = "1";
+    }, 100);
+
+    // Prevent pull-to-refresh (can cause zoom)
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    // iOS specific fixes
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        enableIOSZoomPrevention();
+    }
+}
+
+// iOS-specific zoom prevention
+function enableIOSZoomPrevention() {
+    // iOS specific viewport fix
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.setAttribute('content',
+            'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
+        );
+    }
+
+    // Prevent iOS text size adjustment
+    document.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    // Disable iOS double-tap to zoom
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 500) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, { passive: false });
+}
+
+// Nuclear option - completely disable any scaling
+function nuclearNoZoom() {
+    // Disable any transform scaling
+    const style = document.createElement('style');
+    style.textContent = `
+        * {
+            transform: none !important;
+            scale: none !important;
+            zoom: 1 !important;
+        }
+
+        body {
+            zoom: 1 !important;
+            -webkit-text-size-adjust: 100% !important;
+            -moz-text-size-adjust: 100% !important;
+            -ms-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Continuously reset zoom
+    setInterval(() => {
+        document.body.style.zoom = "1";
+        if (window.visualViewport) {
+            window.visualViewport.scale = 1;
+        }
+    }, 500);
+}
+
+// Blog content setup (if needed)
+function setupBlogContent() {
+    const blogContainer = document.querySelector('.blog-container');
+    if (blogContainer && !blogContainer.innerHTML.trim()) {
+        blogContainer.innerHTML = `
+            <h1 class="blog-title">Welcome to Our Blog</h1>
+            <div class="blog-content">
+                <p>This is where blog content would appear.</p>
+                <p>You can add your blog posts, articles, and other content here.</p>
+            </div>
+        `;
+    }
+}
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', function () {
+    // Setup page layout with navbar and footer
+    setupPageLayout();
+    
+    // Setup blog content if needed
+    setupBlogContent();
+
+    // Initialize security features
     new NoZoom();
     preventZoomEverywhere();
 
@@ -613,145 +773,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         enableMobileZoomPrevention();
     }
-});
 
-// *************************************************************************************************************************************
-
-
-    // Mobile-specific zoom prevention
-    function enableMobileZoomPrevention() {
-        // Disable elastic scrolling (can sometimes cause zoom issues)
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-
-        // Force no zoom on load
-        setTimeout(() => {
-            document.body.style.zoom = "1";
-            document.documentElement.style.zoom = "1";
-        }, 100);
-
-        // Prevent pull-to-refresh (can cause zoom)
-        document.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // iOS specific fixes
-        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            enableIOSZoomPrevention();
-        }
-    }
-
-    // iOS-specific zoom prevention
-    function enableIOSZoomPrevention() {
-        // iOS specific viewport fix
-        const viewport = document.querySelector('meta[name="viewport"]');
-        if (viewport) {
-            viewport.setAttribute('content',
-                'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
-            );
-        }
-
-        // Prevent iOS text size adjustment
-        document.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Disable iOS double-tap to zoom
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 500) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, { passive: false });
-    }
-
-    // Nuclear option - completely disable any scaling
-    function nuclearNoZoom() {
-        // Disable any transform scaling
-        const style = document.createElement('style');
-        style.textContent = `
-    * {
-        transform: none !important;
-        scale: none !important;
-        zoom: 1 !important;
-    }
-
-    body {
-        zoom: 1 !important;
-        -webkit-text-size-adjust: 100% !important;
-        -moz-text-size-adjust: 100% !important;
-        -ms-text-size-adjust: 100% !important;
-        text-size-adjust: 100% !important;
-    }
-`;
-        document.head.appendChild(style);
-
-        // Continuously reset zoom
-        setInterval(() => {
-            document.body.style.zoom = "1";
-            if (window.visualViewport) {
-                window.visualViewport.scale = 1;
-            }
-        }, 500);
-    }
-
-    // Apply nuclear option for maximum prevention
-    document.addEventListener('DOMContentLoaded', () => {
-        nuclearNoZoom();
-    });
-
-    // Fallback for older browsers
-    window.onload = function () {
-        // Final viewport enforcement
-        const viewport = document.querySelector('meta[name="viewport"]');
-        if (viewport) {
-            viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no';
-        }
-
-        // Force initial scale
-        document.body.style.zoom = "1";
-    };
-
-// **********************************************************************************************************************************************************
-
-
-
-
-// Usage
-document.addEventListener('DOMContentLoaded', function () {
-    setupPageLayout(); // Let it auto-detect the current page
-    setupBlogContent();
+    // Apply nuclear option for maximum prevention (optional)
+    // nuclearNoZoom();
 
     // Debug: Log current page for verification
+    console.log('MND Web Development - Page loaded successfully');
     console.log('Current page detected:', getCurrentPage());
 });
 
+// Fallback for older browsers
+window.onload = function () {
+    // Final viewport enforcement
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no';
+    }
 
-// **********************************************************************************************************************************************
+    // Force initial scale
+    document.body.style.zoom = "1";
+};
 
-// Mobile menu functionality
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const tabs = document.querySelector('.tabs');
-            
-            mobileMenuBtn.addEventListener('click', function () {
-                this.classList.toggle('active');
-                tabs.classList.toggle('active');
-            });
-
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function () {
-                    mobileMenuBtn.classList.remove('active');
-                    tabs.classList.remove('active');
-                });
-            });
-
-  // *************************************************************************************************************************************************************
-
-    
+// Export functions for global access (if needed)
+window.MND = {
+    getCurrentPage,
+    setupPageLayout,
+    initializeNavbar
+};

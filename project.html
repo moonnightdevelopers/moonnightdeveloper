@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MND - Web Development Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
         * {
@@ -364,6 +365,7 @@
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
             background-color: white;
+            position: relative;
         }
 
         .extra-card:hover {
@@ -891,18 +893,78 @@
             font-weight: 600;
         }
 
-        .extra-card {
-            position: relative;
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-notification.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Sort Options */
+        .sort-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        .sort-btn.active {
+            background-color: #1c3974;
+            color: white;
+            border-color: #1c3974;
         }
 
         /* Responsive Styles */
         @media (max-width: 768px) {
-           
+            .header-container {
+                flex-wrap: wrap;
+            }
 
             .tabs {
                 order: 3;
                 width: 100%;
                 justify-content: center;
+                margin-top: 10px;
             }
 
             .auth-buttons {
@@ -999,6 +1061,10 @@
                 padding: 14px 20px;
                 font-size: 15px;
             }
+
+            .sort-options {
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1018,8 +1084,6 @@
 </head>
 
 <body>
-   
-
     <!-- Cover Image -->
     <div class="cover-image">
         <img src="./img/mnd-cover-image.webp" alt="Cover image">
@@ -1042,6 +1106,9 @@
                 <div class="project-count">19 Projects</div>
             </div>
 
+            <button class="follow-btn">
+                <i class="fas fa-bell"></i> Follow MND
+            </button>
             <p class="follow-text">Follow MND and get notified of new shop items.</p>
 
             <!-- Search and Filter Section -->
@@ -1071,6 +1138,14 @@
                 </div>
             </div>
 
+            <!-- Sort Options -->
+            <div class="sort-options">
+                <button class="sort-btn active" data-sort="featured">Featured</button>
+                <button class="sort-btn" data-sort="newest">Newest</button>
+                <button class="sort-btn" data-sort="price-low">Price: Low to High</button>
+                <button class="sort-btn" data-sort="price-high">Price: High to Low</button>
+            </div>
+
             <div class="results-info" id="resultsInfo">Showing all 19 projects</div>
 
             <!-- Extras Grid -->
@@ -1087,7 +1162,41 @@
         </div>
     </main>
 
-    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#" class="footer-link">About</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Careers</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Terms</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Privacy</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Your Privacy Choices</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Copyright</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Cookie Policy</a>
+                <div class="footer-divider"></div>
+                <a href="#" class="footer-link">Cookie Preferences</a>
+            </div>
+            <div class="footer-cta">
+                <a href="#" class="footer-cta-link">
+                    <span>MND Web Development</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cartNotification">
+        <i class="fas fa-check-circle"></i>
+        <span>Item added to cart successfully!</span>
+    </div>
+
     <!-- Modal -->
     <div class="modal" id="projectModal">
         <div class="modal-content">
@@ -1162,10 +1271,10 @@
     <script>
         // Project data with multiple images
         const projectData = {
-            creative: {
-                title: "creative Website",
+            Ecommerce: {
+                title: "E-commerce Website",
                 images: [
-                    "./assets/gif/creative-hero.gif",
+                    "./img/projectimg04.png",
                 ],
                 description: "A fully responsive HTML/CSS template designed for yoga studios and wellness centers. This template features a calming color scheme, intuitive navigation, and sections for class schedules, instructor profiles, and meditation resources.",
                 price: "₹499.00",
@@ -1197,8 +1306,8 @@
                 title: "Tours & Travel Website",
                 images: [
                     "./img/Tours & Travel Website.jpg",
-                    "./img/Tours & Travel Website.jpg",
-                    "./img/Tours & Travel Website.jpg"
+                    "./img/traveing.png",
+                    "./img/Tour & Travel Website Design.jpg"
                 ],
                 description: "A beautiful and responsive frontend website for travel agencies and tour operators. Features destination showcases, booking forms, testimonials, and an interactive map section.",
                 price: "₹499.00",
@@ -1210,14 +1319,14 @@
                 date: "2024-02-10"
             },
 
-            travel2: {
-                title: "Website",
+            TechFlix: {
+                title: "OTT Platform",
                 images: [
-                    "./assets/gif/website.gif",
+                    "./img/ott2.jpg",
                 ],
                 description: "A beautiful and responsive frontend website for travel agencies and tour operators. Features destination showcases, booking forms, testimonials, and an interactive map section.",
                 price: "₹499.00",
-                tech: "HTML/CSS/JS",
+                tech: "HTML/CSS/JS, PHP/SQL",
                 responsive: "Yes",
                 type: "Single Page Application",
                 categories: ["html-css", "javascript", "template"],
@@ -1288,14 +1397,14 @@
                 featured: true,
                 date: "2024-03-12"
             },
-            gaming: {
-                title: "Gaming Website Template",
+            Halloween: {
+                title: "Halloween Website Design Template",
                 images: [
-                    "./img/Gaming Website Template.png",
-                    "./img/Gaming Website Template.png",
-                    "./img/Gaming Website Template.png"
+                    "./img/Halloween Website Design.png",
+                    "./img/Halloween Website Design.png",
+                    "./img/Halloween Website Design.png"
                 ],
-                description: "A vibrant gaming website with game showcases, news sections, and community features. Perfect for gaming studios or gaming news portals.",
+                description: "A vibrant Halloween website with game showcases, news sections, and community features. Perfect for gaming studios or gaming news portals.",
                 price: "₹499.00",
                 tech: "HTML/CSS/JS",
                 responsive: "Yes",
@@ -1353,20 +1462,7 @@
                 date: "2024-02-14"
             },
 
-            gaming2: {
-                title: "Gaming Website",
-                images: [
-                    "./assets/gif/gaming.gif",
-                ],
-                description: "A professional hospital website with department information, doctor profiles, appointment booking, and health resources.",
-                price: "₹499.00",
-                tech: "HTML/CSS/JS",
-                responsive: "Yes",
-                type: "Healthcare Template",
-                categories: ["html-css", "javascript", "template"],
-                featured: false,
-                date: "2024-02-14"
-            },
+            
             food: {
                 title: "Food Website Design",
                 images: [
@@ -1529,6 +1625,8 @@
                 const card = document.createElement('div');
                 card.className = 'extra-card';
                 card.setAttribute('data-categories', project.categories.join(' '));
+                card.setAttribute('data-date', project.date);
+                card.setAttribute('data-price', parseFloat(project.price.replace('₹', '')));
 
                 // Format date
                 const date = new Date(project.date);
@@ -1589,11 +1687,17 @@
             const emptyState = document.getElementById('emptyState');
             const resultsInfo = document.getElementById('resultsInfo');
 
+            // Sort elements
+            const sortButtons = document.querySelectorAll('.sort-btn');
+
             // Price section elements
             const modalTotalPrice = document.getElementById('modalTotalPrice');
             const quantityInput = document.getElementById('quantity');
             const priceInput = document.getElementById('price');
             const modalAddToCartBtn = document.getElementById('modalAddToCartBtn');
+
+            // Cart notification
+            const cartNotification = document.getElementById('cartNotification');
 
             // Slider state
             let currentSlide = 0;
@@ -1603,6 +1707,7 @@
             // Search and Filter state
             let currentFilter = 'all';
             let currentSearch = '';
+            let currentSort = 'featured';
 
             // Function to open modal with project data
             window.openModal = function (projectId) {
@@ -1779,6 +1884,9 @@
                     }
                 });
 
+                // Sort projects
+                sortProjects();
+
                 // Update results info
                 resultsInfo.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
 
@@ -1790,6 +1898,33 @@
                     emptyState.style.display = 'none';
                     projectsGrid.style.display = 'grid';
                 }
+            }
+
+            // Sort projects
+            function sortProjects() {
+                const projectCards = Array.from(document.querySelectorAll('.extra-card'));
+                const container = document.getElementById('projectsGrid');
+
+                projectCards.sort((a, b) => {
+                    switch (currentSort) {
+                        case 'newest':
+                            return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+                        case 'price-low':
+                            return parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price'));
+                        case 'price-high':
+                            return parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price'));
+                        case 'featured':
+                        default:
+                            const aFeatured = a.querySelector('.featured-badge') !== null;
+                            const bFeatured = b.querySelector('.featured-badge') !== null;
+                            if (aFeatured && !bFeatured) return -1;
+                            if (!aFeatured && bFeatured) return 1;
+                            return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+                    }
+                });
+
+                // Re-append sorted cards
+                projectCards.forEach(card => container.appendChild(card));
             }
 
             // Search input event listener
@@ -1811,6 +1946,19 @@
                 });
             });
 
+            // Sort button event listeners
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Update active sort button
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Update current sort
+                    currentSort = this.getAttribute('data-sort');
+                    filterProjects();
+                });
+            });
+
             // Clear filters button
             clearFiltersBtn.addEventListener('click', function () {
                 searchInput.value = '';
@@ -1819,6 +1967,10 @@
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
                 currentFilter = 'all';
+
+                sortButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.sort-btn[data-sort="featured"]').classList.add('active');
+                currentSort = 'featured';
 
                 filterProjects();
             });
@@ -1843,8 +1995,16 @@
                 const quantity = quantityInput.value;
                 const price = priceInput.value;
 
-                alert(`Added ${quantity} item(s) to cart for ${price}`);
-                closeModalFunc();
+                // Show cart notification
+                cartNotification.classList.add('show');
+                setTimeout(() => {
+                    cartNotification.classList.remove('show');
+                }, 3000);
+
+                // Close modal after a short delay
+                setTimeout(() => {
+                    closeModalFunc();
+                }, 500);
             });
 
             // Initialize price on page load
@@ -1853,26 +2013,6 @@
             // Initialize with all projects visible
             filterProjects();
         }
-        // // inspect block function
-        // /// Disable right-click
-        // document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-        // function ctrlShiftKey(e, keyCode) {
-        //     return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
-        // }
-
-        // document.onkeydown = (e) => {
-        //     // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
-        //     if (
-        //         event.keyCode === 123 ||
-        //         ctrlShiftKey(e, 'I') ||
-        //         ctrlShiftKey(e, 'J') ||
-        //         ctrlShiftKey(e, 'C') ||
-        //         (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
-        //     )
-        //         return false;
-        // };
-        // ok
     </script>
 </body>
 
