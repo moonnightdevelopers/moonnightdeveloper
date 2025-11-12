@@ -381,6 +381,8 @@ function getCurrentPage() {
         'about': 'about',
         'services.html': 'services',
         'services': 'services',
+        'team.html': 'team',
+        'team': 'team',
         'project.html': 'project',
         'project': 'project',
         'blog.html': 'blog',
@@ -403,6 +405,7 @@ function createNavbarHTML(currentPage = null) {
         'home': { name: 'Home', url: 'index.html' },
         'about': { name: 'About', url: 'about.html' },
         'services': { name: 'Services', url: 'services.html' },
+        'team': { name: 'Team', url: 'team.html' },
         'project': { name: 'Project', url: 'project.html' },
         'blog': { name: 'Blog', url: 'blog.html' },
         'contact': { name: 'Contact', url: 'contact.html' }
