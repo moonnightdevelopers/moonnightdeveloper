@@ -380,7 +380,7 @@ function getCurrentPage() {
         'services.html': 'services',
         'project.html': 'project',
         'blog.html': 'blog',
-        'contact.html': 'contact'
+        ' contact.html': 'contact'
     };
 
     return pageMap[page] || 'home';

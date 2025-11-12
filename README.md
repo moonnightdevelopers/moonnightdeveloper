@@ -63,7 +63,7 @@ mnd-contact-page/
     ├── services.html         # Services page
     ├── projects.html         # Projects page
     ├── blog.html             # Blog page
-    └── contact.html          # Contact page (current)
+    └──  contact.html          # Contact page (current)
 ```
 
 ## 🚀 Installation & Setup
