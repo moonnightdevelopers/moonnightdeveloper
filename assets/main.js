@@ -13,12 +13,11 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #1C1B1F;
-    background-color: #fcdcdcff;
+    background-color: #fef2f2;
     font-size: 16px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
 /* Main content area */
@@ -28,7 +27,6 @@ body {
     max-width: 1500px;
     margin: 0 auto;
     width: 100%;
-    overflow: visible;
 }
 
 /* Blog specific styles */
@@ -306,7 +304,6 @@ body {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         padding: 16px 0;
         gap: 0;
-        z-index: 30;
     }
 
     .tabs.active {
@@ -566,7 +563,7 @@ function setupPageLayout(currentPage = null) {
     initializeNavbar();
 }
 
-// Improved Security Features - Less intrusive
+// Security Features - Modified to be less intrusive
 document.addEventListener('contextmenu', (e) => {
     // Allow right-click but prevent default
     e.preventDefault();
@@ -589,80 +586,89 @@ document.onkeydown = (e) => {
     }
 };
 
-// Simple viewport setup without aggressive zoom prevention
-function setupViewport() {
-    let viewport = document.querySelector('meta[name="viewport"]');
-    if (!viewport) {
-        viewport = document.createElement('meta');
-        viewport.name = 'viewport';
-        document.head.appendChild(viewport);
+// Zoom prevention functionality
+class NoZoom {
+    constructor() {
+        this.init();
     }
-    // Allow zooming for accessibility
-    viewport.content = 'width=device-width, initial-scale=1.0';
+
+    init() {
+        this.disableZoom();
+        this.preventZoomGestures();
+    }
+
+    disableZoom() {
+        // Set viewport to prevent zooming
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 
+                'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'
+            );
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no';
+            document.head.appendChild(meta);
+        }
+    }
+
+    preventZoomGestures() {
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent pinch zoom
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    }
 }
 
-// Blog content setup (if needed)
-function setupBlogContent() {
-    const blogContainer = document.querySelector('.blog-container');
-    if (blogContainer && !blogContainer.innerHTML.trim()) {
-        blogContainer.innerHTML = `
-            <h1 class="blog-title">Welcome to Our Blog</h1>
-            <div class="blog-content">
-                <p>This is where blog content would appear.</p>
-                <p>You can add your blog posts, articles, and other content here.</p>
-            </div>
-        `;
+// Initialize zoom prevention
+function preventZoomEverywhere() {
+    // Disable zoom via meta viewport
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (viewportMeta) {
+        viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no';
     }
+
+    // Disable zoom via CSS
+    const antiZoomStyle = document.createElement('style');
+    antiZoomStyle.textContent = `
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    `;
+    document.head.appendChild(antiZoomStyle);
 }
-
-// Main initialization
-document.addEventListener('DOMContentLoaded', function () {
-    // Setup viewport first
-    setupViewport();
-    
-    // Setup page layout with navbar and footer
-    setupPageLayout();
-    
-    // Setup blog content if needed
-    setupBlogContent();
-
-    // Debug: Log current page for verification
-    console.log('MND Web Development - Page loaded successfully');
-    console.log('Current page detected:', getCurrentPage());
-});
-
-// Fallback for older browsers
-window.onload = function () {
-    // Ensure viewport is set
-    setupViewport();
-};
-
-// Export functions for global access (if needed)
-window.MND = {
-    getCurrentPage,
-    setupPageLayout,
-    initializeNavbar
-};
-
-// zoom
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    new NoZoom();
-    preventZoomEverywhere();
-    
-    // Additional mobile-specific fixes
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        enableMobileZoomPrevention();
-    }
-});
 
 // Mobile-specific zoom prevention
 function enableMobileZoomPrevention() {
     // Disable elastic scrolling (can sometimes cause zoom issues)
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
-    
+
     // Force no zoom on load
     setTimeout(() => {
         document.body.style.zoom = "1";
@@ -687,7 +693,7 @@ function enableIOSZoomPrevention() {
     // iOS specific viewport fix
     const viewport = document.querySelector('meta[name="viewport"]');
     if (viewport) {
-        viewport.setAttribute('content', 
+        viewport.setAttribute('content',
             'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover'
         );
     }
@@ -720,7 +726,7 @@ function nuclearNoZoom() {
             scale: none !important;
             zoom: 1 !important;
         }
-        
+
         body {
             zoom: 1 !important;
             -webkit-text-size-adjust: 100% !important;
@@ -740,22 +746,60 @@ function nuclearNoZoom() {
     }, 500);
 }
 
-// Apply nuclear option for maximum prevention
-document.addEventListener('DOMContentLoaded', () => {
-    nuclearNoZoom();
+// Blog content setup (if needed)
+function setupBlogContent() {
+    const blogContainer = document.querySelector('.blog-container');
+    if (blogContainer && !blogContainer.innerHTML.trim()) {
+        blogContainer.innerHTML = `
+            <h1 class="blog-title">Welcome to Our Blog</h1>
+            <div class="blog-content">
+                <p>This is where blog content would appear.</p>
+                <p>You can add your blog posts, articles, and other content here.</p>
+            </div>
+        `;
+    }
+}
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', function () {
+    // Setup page layout with navbar and footer
+    setupPageLayout();
+    
+    // Setup blog content if needed
+    setupBlogContent();
+
+    // Initialize security features
+    new NoZoom();
+    preventZoomEverywhere();
+
+    // Additional mobile-specific fixes
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        enableMobileZoomPrevention();
+    }
+
+    // Apply nuclear option for maximum prevention (optional)
+    // nuclearNoZoom();
+
+    // Debug: Log current page for verification
+    console.log('MND Web Development - Page loaded successfully');
+    console.log('Current page detected:', getCurrentPage());
 });
 
 // Fallback for older browsers
-window.onload = function() {
+window.onload = function () {
     // Final viewport enforcement
     const viewport = document.querySelector('meta[name="viewport"]');
     if (viewport) {
         viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no';
     }
-    
+
     // Force initial scale
     document.body.style.zoom = "1";
 };
 
-
-// 
+// Export functions for global access (if needed)
+window.MND = {
+    getCurrentPage,
+    setupPageLayout,
+    initializeNavbar
+};
