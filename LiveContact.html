@@ -899,7 +899,7 @@
         // Function to add a new message
         function addMessage(text, isUser) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user' : 'support'}`;
+            messageDiv.className = `message ₹{isUser ? 'user' : 'support'}`;
             
             const bubbleDiv = document.createElement('div');
             bubbleDiv.className = 'message-bubble';
@@ -1014,7 +1014,7 @@
             const subject = document.getElementById('subject').value;
             
             // Show success message
-            alert(`Thank you, ${firstName}! Your message has been sent successfully.\n\nWe'll get back to you at ${email} regarding your ${subject} inquiry within 24 hours.`);
+            alert(`Thank you, ₹{firstName}! Your message has been sent successfully.\n\nWe'll get back to you at ₹{email} regarding your ₹{subject} inquiry within 24 hours.`);
             
             // Reset form and close modal
             contactForm.reset();

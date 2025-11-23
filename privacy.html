@@ -692,7 +692,7 @@
                     // Show target content
                     contentSections.forEach(section => {
                         section.classList.remove('active');
-                        if (section.id === `${targetContent}-content`) {
+                        if (section.id === `₹{targetContent}-content`) {
                             section.classList.add('active');
                         }
                     });
@@ -702,7 +702,7 @@
             // Set active tab based on URL hash
             if (window.location.hash) {
                 const hash = window.location.hash.substring(1);
-                const targetButton = document.querySelector(`.legal-nav-btn[data-content="${hash}"]`);
+                const targetButton = document.querySelector(`.legal-nav-btn[data-content="₹{hash}"]`);
                 if (targetButton) {
                     targetButton.click();
                 }

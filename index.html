@@ -1450,13 +1450,13 @@
 
                     // Update selected amount and button text
                     selectedAmount = parseInt(this.dataset.amount);
-                    supportButton.textContent = `Support $${selectedAmount}`;
+                    supportButton.textContent = `Support ₹₹{selectedAmount}`;
                 });
             });
 
             // Support button click handler
             supportButton.addEventListener('click', function () {
-                alert(`Thank you for your support of $${selectedAmount}! This would redirect to payment processing in a real implementation.`);
+                alert(`Thank you for your support of ₹₹{selectedAmount}! This would redirect to payment processing in a real implementation.`);
             });
 
             // Back to top button

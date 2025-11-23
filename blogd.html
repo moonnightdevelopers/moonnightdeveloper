@@ -695,7 +695,7 @@
         document.querySelectorAll('.blog-card').forEach(card => {
             card.addEventListener('click', function () {
                 const title = this.querySelector('.blog-card-title').textContent;
-                alert(`This would navigate to the full article: "${title}"`);
+                alert(`This would navigate to the full article: "₹{title}"`);
             });
         });
 
@@ -703,7 +703,7 @@
         document.querySelector('.newsletter-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const email = this.querySelector('.newsletter-input').value;
-            alert(`Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
+            alert(`Thank you for subscribing with ₹{email}! You'll receive our latest updates soon.`);
             this.reset();
         });
 
@@ -719,7 +719,7 @@
             button.addEventListener('click', function (e) {
                 e.preventDefault();
                 const direction = this.classList.contains('prev') ? 'Previous' : 'Next';
-                alert(`This would navigate to the ${direction} article`);
+                alert(`This would navigate to the ₹{direction} article`);
             });
         });
     </script>

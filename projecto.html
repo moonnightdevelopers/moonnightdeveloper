@@ -1259,7 +1259,7 @@
                     <div class="detail-row">
                         <div class="detail-item">
                             <div class="detail-label">Price</div>
-                            <div class="detail-value" id="modalPrice">$0.00</div>
+                            <div class="detail-value" id="modalPrice">₹0.00</div>
                         </div>
                         <div class="detail-item">
                             <div class="detail-label">Technology</div>
@@ -1279,7 +1279,7 @@
                     <div class="price-section-row">
                         <div class="price-display">
                             <div class="price-label">Total Price</div>
-                            <div class="price" id="modalTotalPrice">$0.00</div>
+                            <div class="price" id="modalTotalPrice">₹0.00</div>
                         </div>
 
                         <div class="input-row">
@@ -1290,7 +1290,7 @@
 
                             <div class="input-group">
                                 <label for="price">Enter a list price</label>
-                                <input type="text" id="price" value="$ 100.20">
+                                <input type="text" id="price" value="₹ 100.20">
                             </div>
                         </div>
 
@@ -1734,16 +1734,16 @@
                 });
 
                 card.innerHTML = `
-                    ${project.featured ? '<div class="featured-badge">Featured</div>' : ''}
-                    <img src="${project.images[0]}" alt="${project.title}" class="extra-image">
+                    ₹{project.featured ? '<div class="featured-badge">Featured</div>' : ''}
+                    <img src="₹{project.images[0]}" alt="₹{project.title}" class="extra-image">
                     <div class="extra-content">
                         <div class="project-meta">
-                            <div class="project-date">${formattedDate}</div>
+                            <div class="project-date">₹{formattedDate}</div>
                         </div>
-                        <h3 class="extra-title">${project.title}</h3>
-                        <p class="extra-description">${project.description}</p>
-                        <div class="extra-price">${project.price}</div>
-                        <button class="add-to-cart-btn" data-project="${projectId}">View</button>
+                        <h3 class="extra-title">₹{project.title}</h3>
+                        <p class="extra-description">₹{project.description}</p>
+                        <div class="extra-price">₹{project.price}</div>
+                        <button class="add-to-cart-btn" data-project="₹{projectId}">View</button>
                     </div>
                 `;
                 projectsGrid.appendChild(card);
@@ -1838,7 +1838,7 @@
                 images.forEach((image, index) => {
                     const slide = document.createElement('img');
                     slide.src = image;
-                    slide.alt = `Project image ${index + 1}`;
+                    slide.alt = `Project image ₹{index + 1}`;
                     slide.classList.add('slide');
                     imageSlider.appendChild(slide);
 
@@ -1864,7 +1864,7 @@
 
             // Update slider position based on current slide
             function updateSliderPosition() {
-                imageSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                imageSlider.style.transform = `translateX(-₹{currentSlide * 100}%)`;
             }
 
             // Update active dot
@@ -1976,7 +1976,7 @@
                 });
 
                 // Update results info
-                resultsInfo.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
+                resultsInfo.textContent = `Showing ₹{visibleCount} of ₹{projectCards.length} projects`;
 
                 // Show empty state if no projects match
                 if (visibleCount === 0) {
@@ -2025,10 +2025,10 @@
                 const basePrice = 100.20;
                 const totalPrice = basePrice * quantity;
 
-                priceInput.value = `$ ${totalPrice.toFixed(2)}`;
+                priceInput.value = `₹ ₹{totalPrice.toFixed(2)}`;
 
                 // Update the displayed price
-                modalTotalPrice.textContent = `$${(443.37 * quantity).toFixed(2)}`;
+                modalTotalPrice.textContent = `₹₹{(443.37 * quantity).toFixed(2)}`;
             }
 
             // Quantity input event listener
@@ -2039,7 +2039,7 @@
                 const quantity = quantityInput.value;
                 const price = priceInput.value;
 
-                alert(`Added ${quantity} item(s) to cart for ${price}`);
+                alert(`Added ₹{quantity} item(s) to cart for ₹{price}`);
                 closeModalFunc();
             });
 
