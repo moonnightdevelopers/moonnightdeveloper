@@ -83,7 +83,7 @@ mnd-contact-page/
 
 # MND
 
-![MoonNightDeveloper](./mndb.JPG)
+![MoonNightDeveloper](./mnda.png)
 ## 📋 Usage
 
 ### Basic Usage
